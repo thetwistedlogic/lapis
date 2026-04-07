@@ -3,7 +3,7 @@ import yaml
 import sys
 
 if len(sys.argv) < 2:
-    print("Usage: python build_anki_deck.py <output_file>")
+    print("Usage: python genapkg.py <output_file>")
     sys.exit(1)
 
 LAPIS_TEMPLATE_ID = 1667218449922

@@ -1,7 +1,7 @@
 # A meta script for extracting the data from example_card.csv and putting it into a more user friendly format
 import yaml
 
-with open("anki_fields.yaml", "r", encoding="utf-8") as fields_file:
+with open("anki_fields.old.yaml", "r", encoding="utf-8") as fields_file:
     anki_fields = yaml.safe_load(fields_file)
 
 with open("example_card.csv") as f:

@@ -77,13 +77,13 @@
             <div class="def-image tappable">{{DefinitionPicture}}</div>
             {{/DefinitionPicture}}
             <div class="definition">
-                {{#SelectionText}}
-                <div id="selection" data-display-name="Text Selection">{{SelectionText}}</div>
-                {{/SelectionText}}
                 {{#MainDefinition}}
                 <div id="primary" data-display-name="Primary Definition">{{MainDefinition}}</div>
                 {{/MainDefinition}}
                 <div id="glossaries" data-display-name="Glossaries">{{Glossary}}</div>
+                {{#SelectionText}}
+                <div id="selection" data-display-name="Text Selection">{{SelectionText}}</div>
+                {{/SelectionText}}
             </div>
         </div>
 

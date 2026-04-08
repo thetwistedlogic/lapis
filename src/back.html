@@ -41,13 +41,12 @@
 
                 <!-- Reading + Pitch Accent -->
                 <div class="info">
-                    <div class="pitch">
-                        {{#ExpressionFurigana}}{{kana:ExpressionFurigana}}{{/ExpressionFurigana}}
-                        {{^ExpressionFurigana}}{{ExpressionReading}}{{/ExpressionFurigana}}
-                    </div>
+                    <!-- <div class="pitch"> -->
+                    <!--     {{#ExpressionFurigana}}{{kana:ExpressionFurigana}}{{/ExpressionFurigana}} -->
+                    <!--     {{^ExpressionFurigana}}{{ExpressionReading}}{{/ExpressionFurigana}} -->
+                    <!-- </div> -->
+                    <!-- <span id="pitch-tags" class="tags">{{PitchPosition}}</span> -->
 
-                    <!-- Pitch Accent -->
-                    <span id="pitch-tags" class="tags">{{PitchPosition}}</span>
                     <!-- Pitch Accent Graph -->
                     {{#PitchAccentGraph}}<span id="pitch-accent-graph">{{PitchAccentGraph}}</span>{{/PitchAccentGraph}}
                     <br />
@@ -61,16 +60,14 @@
             {{#Picture}}<div class="image-alt tappable {{Tags}}">{{Picture}}</div>{{/Picture}}
             {{#SentenceFurigana}} {{furigana:SentenceFurigana}} {{/SentenceFurigana}}
             {{^SentenceFurigana}} {{furigana:Sentence}} {{/SentenceFurigana}}
-            <div class="audio-buttons-alt"></div>
-        </div>
-        <br>
-        {{#SentenceEnglish}} 
-        <div class="sentence">
+            {{#SentenceEnglish}} 
             <div id="sentence-english" data-display-name="Sentence English">
                 {{SentenceEnglish}}
             </div>
+            {{/SentenceEnglish}}
+            <div class="audio-buttons-alt"></div>
         </div>
-        {{/SentenceEnglish}}
+        <br>
 
         <!-- The entire definition box -->
         <div class="def-info">First Definition 1/?</div>
@@ -238,6 +235,11 @@
         if (vocabElement !== null) {
             vocabElement.classList.add(pitchType);
         }
+
+        const pitchAccentGraph = document.querySelector("#pitch-accent-graph");
+        if (pitchAccentGraph !== null) {
+            pitchAccentGraph.classList.add(pitchType);
+        }
     }
 
     // Seperate Tags by space, and show them in their own boxes
@@ -272,71 +274,71 @@
     }
 
     function constructPitch(kana, pitchPatterns) {
-        const morae = groupMoras(kana);
-        const pitch = document.querySelector(".pitch");
-        const pitchTags = document.querySelector("#pitch-tags");
-
-        const createPitchSpan = (pitchClass, pitchChar) => {
-            const pitchSpan = document.createElement("span");
-            const charSpan = document.createElement("span");
-            const lineSpan = document.createElement("span");
-
-            pitchSpan.classList.add(pitchClass);
-            charSpan.classList.add("pitch-char");
-            charSpan.innerText = pitchChar;
-            lineSpan.classList.add("pitch-line");
-
-            pitchSpan.appendChild(charSpan);
-            pitchSpan.appendChild(lineSpan);
-
-            return pitchSpan;
-        };
-
-        pitch.innerHTML = "";
-        pitchTags.innerHTML = "";
-        const pitchList = document.createElement("ul");
-        const pitchTagList = document.createElement("ul");
-
-        for (let pitchPattern of pitchPatterns) {
-            const pitchTag = document.createElement("li");
-            const pitchItem = document.createElement("li");
-            pitchItem.classList.add("pitch-item");
-
-            const isCompound = Array.isArray(pitchPattern);
-            if(isCompound) {
-                // Filters duplicates
-                const tag = pitchPattern.map(({position}) => position).join(",");
-                if([...pitchTagList.children].some(pitchTag => pitchTag.innerText === tag)) continue;
-                pitchTag.innerText = tag;
-            } else {
-                pitchItem.classList.add(getPitchType(kana, pitchPattern));
-                pitchTag.innerText = pitchPattern;
-                pitchPattern = [{position: pitchPattern, moraCount: morae.length}];
-            }
-
-            let offset = 0;
-            for (const {position, moraCount} of pitchPattern) {
-                for (let i = 0; i < moraCount; i++) {
-                    let moraPitch = "";
-                    if (position <= 0) {
-                        moraPitch = i === 0 ? "pitch-low" : "pitch-high";
-                    } else if (position === 1) {
-                        moraPitch = i === 0 ? "pitch-to-drop" : "pitch-low";
-                    } else {
-                        moraPitch = i === position - 1 ? "pitch-to-drop" :
-                            i === 0 || i >= position ? "pitch-low" : "pitch-high";
-                    }
-                    if (offset + i >= morae.length) continue;
-                    pitchItem.appendChild(createPitchSpan(moraPitch, morae[offset + i]));
-                }
-                offset += moraCount;
-            }
-            pitchTagList.appendChild(pitchTag);
-            pitchList.appendChild(pitchItem);
-        }
-
-        pitch.appendChild(pitchList);
-        pitchTags.appendChild(pitchTagList);
+        // const morae = groupMoras(kana);
+        // const pitch = document.querySelector(".pitch");
+        // const pitchTags = document.querySelector("#pitch-tags");
+        //
+        // const createPitchSpan = (pitchClass, pitchChar) => {
+        //     const pitchSpan = document.createElement("span");
+        //     const charSpan = document.createElement("span");
+        //     const lineSpan = document.createElement("span");
+        //
+        //     pitchSpan.classList.add(pitchClass);
+        //     charSpan.classList.add("pitch-char");
+        //     charSpan.innerText = pitchChar;
+        //     lineSpan.classList.add("pitch-line");
+        //
+        //     pitchSpan.appendChild(charSpan);
+        //     pitchSpan.appendChild(lineSpan);
+        //
+        //     return pitchSpan;
+        // };
+        //
+        // pitch.innerHTML = "";
+        // pitchTags.innerHTML = "";
+        // const pitchList = document.createElement("ul");
+        // const pitchTagList = document.createElement("ul");
+        //
+        // for (let pitchPattern of pitchPatterns) {
+        //     const pitchTag = document.createElement("li");
+        //     const pitchItem = document.createElement("li");
+        //     pitchItem.classList.add("pitch-item");
+        //
+        //     const isCompound = Array.isArray(pitchPattern);
+        //     if(isCompound) {
+        //         // Filters duplicates
+        //         const tag = pitchPattern.map(({position}) => position).join(",");
+        //         if([...pitchTagList.children].some(pitchTag => pitchTag.innerText === tag)) continue;
+        //         pitchTag.innerText = tag;
+        //     } else {
+        //         pitchItem.classList.add(getPitchType(kana, pitchPattern));
+        //         pitchTag.innerText = pitchPattern;
+        //         pitchPattern = [{position: pitchPattern, moraCount: morae.length}];
+        //     }
+        //
+        //     let offset = 0;
+        //     for (const {position, moraCount} of pitchPattern) {
+        //         for (let i = 0; i < moraCount; i++) {
+        //             let moraPitch = "";
+        //             if (position <= 0) {
+        //                 moraPitch = i === 0 ? "pitch-low" : "pitch-high";
+        //             } else if (position === 1) {
+        //                 moraPitch = i === 0 ? "pitch-to-drop" : "pitch-low";
+        //             } else {
+        //                 moraPitch = i === position - 1 ? "pitch-to-drop" :
+        //                     i === 0 || i >= position ? "pitch-low" : "pitch-high";
+        //             }
+        //             if (offset + i >= morae.length) continue;
+        //             pitchItem.appendChild(createPitchSpan(moraPitch, morae[offset + i]));
+        //         }
+        //         offset += moraCount;
+        //     }
+        //     pitchTagList.appendChild(pitchTag);
+        //     pitchList.appendChild(pitchItem);
+        // }
+        //
+        // pitch.appendChild(pitchList);
+        // pitchTags.appendChild(pitchTagList);
     }
 
     // Returns the dictionary content, without the dictionary name.

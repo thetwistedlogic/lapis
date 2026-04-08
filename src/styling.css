@@ -518,7 +518,6 @@ main {
 .image img, .image-alt img {
   max-height: 400px;
   width: auto;
-  border-radius: 5px;
   cursor: pointer;
   transition: filter 0.3s;
 }

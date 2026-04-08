@@ -7,6 +7,8 @@ A fork of Lapis that adds some neat features that I personally enjoy:
 - "Sentence English" field
   - For english translations of sentences
 - "Picture" is on the left and captions "MiscInfo"
+- The queue at the bottom now goes from "TextDefinition" -> "Glossary" -> "TextSelection"
+  - By default, we start on the "TextSelection" field which is useless for me
 
 ![Image Showcasing New Features](./assets/fork.png)
 

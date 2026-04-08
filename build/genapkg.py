@@ -1,3 +1,4 @@
+from pathlib import Path
 import genanki
 import yaml
 import sys
@@ -37,14 +38,25 @@ lapis = genanki.Model(
 
 deck = genanki.Deck(LAPIS_DECK_ID, "Lapis")
 
-with open("example_card.csv", "r") as f:
-    for line in f:
-        fields_content = line.strip().split("\t")
-        deck.add_note(
-            genanki.Note(
-                model=lapis, fields=fields_content, tags=["アニメ::小市民シリーズ"]
-            )
-        )
+example_card = Path("example_card")
+fields_content = []
+files = sorted(example_card.iterdir())
+for file in files:
+    content = file.read_text()
+    fields_content.append(content)
+
+deck.add_note(
+    genanki.Note(model=lapis, fields=fields_content, tags=["アニメ::小市民シリーズ"])
+)
+
+# with open("example_card.csv", "r") as f:
+#     for line in f:
+#         fields_content = line.strip().split("\t")
+#         deck.add_note(
+#             genanki.Note(
+#                 model=lapis, fields=fields_content, tags=["アニメ::小市民シリーズ"]
+#             )
+#         )
 
 package = genanki.Package(deck)
 package.media_files = [

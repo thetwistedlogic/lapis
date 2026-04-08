@@ -52,3 +52,5 @@
 - name: SentenceEnglish
   font: Hiragino Sans Pr6N
   size: 20
+- name: PitchAccentGraph
+  font: Hiragino Sans Pr6N

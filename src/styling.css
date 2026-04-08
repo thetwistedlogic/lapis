@@ -682,8 +682,31 @@ footer {
 .dh-image {
   max-width: 400px;
   position: relative;
-  font-size: 0;
-  /* weird hack needed to make the image stay in line with the .def-header */
+  margin-bottom: 0;
+}
+
+.dh-image-caption {
+  font-size: var(--main-font-size);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 8px 12px;
+  margin-top: -8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 2em;
+  transition: max-height 0.3s ease, overflow 0.3s ease;
+}
+
+.dh-image-caption:hover {
+  white-space: normal;
+  overflow-y: auto;
+  max-height: 200px;
+  word-wrap: break-word;
 }
 
 .mobile .dh-vocab {

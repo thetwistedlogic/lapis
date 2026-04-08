@@ -22,6 +22,17 @@
     <main>
         <!-- The first row (vocab box+picture) -->
         <div class="def-header">
+            <!-- Image -->
+            {{#Picture}}
+            <div class="dh-image">
+                <div class="image tappable {{Tags}}">{{Picture}}</div>
+                {{#MiscInfo}}
+                <div class="dh-image-caption">
+                    {{MiscInfo}}
+                </div>
+                {{/MiscInfo}}
+            </div>
+            {{/Picture}}
             <div class="dh-vocab">
                 <div class="vocab">
                     {{#ExpressionFurigana}}{{furigana:ExpressionFurigana}}{{/ExpressionFurigana}}
@@ -43,13 +54,6 @@
                     <div class="audio-buttons"></div>
                 </div>
             </div>
-
-            <!-- Image -->
-            {{#Picture}}
-            <div class="dh-image">
-                <div class="image tappable {{Tags}}">{{Picture}}</div>
-            </div>
-            {{/Picture}}
         </div>
 
         <br>
@@ -95,16 +99,6 @@
             <div class="audio-buttons-alt"></div>
         </div>
 
-        {{#MiscInfo}}
-        <details>
-            <summary>Misc. info</summary>
-            <div class="misc-info">
-                === Details ===
-                <br />
-                {{MiscInfo}}
-            </div>
-        </details>
-        {{/MiscInfo}}
     </main>
 
     <!----------- Footer ------------->
@@ -498,7 +492,7 @@
     // Sets the height of dhVocab, dhImage, defHeader as a whole
     function setDHHeight() {
         var dhVocab = document.querySelector('.dh-vocab');
-        var dhImage = document.querySelector('.dh-image img');
+        var dhImage = document.querySelector('.dh-image');
         var defHeader = document.querySelector('.def-header');
 
         if (dhVocab && dhImage) {
